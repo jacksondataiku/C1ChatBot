@@ -1,0 +1,10 @@
+streamlit
+installhugchat==0.0.8
+requests
+pandas
+pyarrow
+snowflake-connector-python
+streamlit
+openai
+llama-index
+nltk
