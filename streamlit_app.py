@@ -37,7 +37,7 @@ def get_retail_db_query(question):
       'data_types': 'NUMBER(38,0),VARCHAR(16777216).',
       'description': 'This is a table of all the product categories we have for the products we sell at the retail company'},
     ]
-    api_key = "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"
+    api_key = st.secrets.openai_key
     
     background_info = ""
     for table in tables:
@@ -69,8 +69,8 @@ def get_retail_db_query(question):
     response = requests.post(url = "https://api.openai.com/v1/chat/completions", json = payload ,headers = headers)
     query = response.json()['choices'][0]['message']['content'].replace("\n",' ')
     error_list = ['DELETE','UPDATE','CREATE','ALTER','GRANT','PERMISSION','INSERT','DROP','REPLACE','PASSWORD']
-    if  any([x in query for x in error_list]):
-        return "SELECT 1"
+    if  any([x in query.upper() for x in error_list]):
+        return "'Your query was malformed or your question could not be answered with the given data. Please try again with a new question'"
     else:
         return response.json()['choices'][0]['message']['content'].replace("\n",' ')
 def get_query_df(question):
@@ -78,7 +78,7 @@ def get_query_df(question):
         r = get_retail_db_query(question)
         conn = snowflake.connector.connect(
             user='jacksonmakl0531',
-            password='Redpufflepie123*',
+            password= st.secrets.snowflake_db_pass,
             account='thzvyjm-clb79676',
         )
         cursor = conn.cursor()
