@@ -1,8 +1,8 @@
-requests
-pandas
-pyarrow
-snowflake-connector-python
 streamlit
 openai
 llama-index
 nltk
+snowflake-connector-python
+pandas
+pyarrow
+requests
