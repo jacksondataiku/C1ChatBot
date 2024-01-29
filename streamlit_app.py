@@ -89,7 +89,7 @@ def get_query_df(question):
         r = 'Your query was malformed or your question could not be answered with the given data. Please try again with a new question'
     return df, r
 
-openai.api_key = "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"
+openai.api_key = "********************************************"
 st.header("Retail Explorer Chatbot 🛍️")
 a = st.radio("Show SQL Query or Hide", ['Show', 'Hide'], 1)
 if "messages" not in st.session_state.keys(): # Initialize the chat message history
